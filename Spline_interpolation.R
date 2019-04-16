@@ -45,12 +45,18 @@ write.csv(Final, file = "C:\\Users\\varjo\\Desktop\\Final_interpolation.csv")
 
 #*******************************************************************************************************
 
+# Clear all the connection and Memory
+closeAllConnections()
+rm(list=ls()) 
+graphics.off()
 
 Nomi <- read.csv("C:\\Users\\varjo\\Desktop\\NOMI_Data_O.csv", header = TRUE)
 names(Nomi)<-c("Luminance_1","Y_1", "Luminance_2","Y_2", "Luminance_3","Y_3")
+Luminance_2<-(Luminance_2*370*1/90)
+Luminance_3<-(Luminance_3*720*1/90)
 attach(Nomi)
 #par(mfrow = c(3,1))
-plot(Luminance_1,Y_1, xlab = "Luminance (cd/m2)",ylab = "Y (pixel)", type="l", lty=2, lwd=3 )
+plot(Luminance_1,Y_1, xlab = "Luminance * Exp * ISO (cd/m2)",ylab = "Y (pixel)", type="l", lty=2, lwd=3 )
 lines(Luminance_2,Y_2, xlab = "Luminance (cd/m2)",ylab = "Y (pixel)", type="l", lty=3, lwd=3 )
 lines(Luminance_3,Y_3, xlab = "Luminance (cd/m2)",ylab = "Y (pixel)", type="l", lty=4, lwd=3 )
 
