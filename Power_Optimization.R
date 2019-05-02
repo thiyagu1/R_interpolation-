@@ -26,7 +26,7 @@ points(x,pixel_intensity_y, xlab = "X (Lux*ISO*Exposure)",ylab = "Y (pixel)",col
 legend("bottomright", c("Nomicam_Y1", "POW_EQ_Y1"), col=c("red", "blue"), lty=1, cex=0.8)
 title("Mapping Luminance to Luma Pixel intensity ")
 
-# 0000000000000000000000000000000000000000000000000000000000000000Case 2 : Dataset 2
+#Case 2 : Dataset 2
 ISO_2<-100 * 4.0
 Exposure_2<-1/125
 x_2 <- Luminance_2*ISO_2*Exposure_2
