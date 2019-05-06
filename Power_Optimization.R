@@ -11,8 +11,8 @@ Nomi <- read.csv("C:\\Users\\varjo\\Desktop\\NOMI_Data_O.csv", header = TRUE)
 names(Nomi)<-c("Luminance_1","Y_1", "Luminance_2","Y_2", "Luminance_3","Y_3")
 attach(Nomi)
 
-a <- 41.8189
-g <- 0.3595858
+a <- 40.8189    #41.8189
+g <- 0.3495858  #0.3595858
 
 # Case 1 : Dataset 1
 ISO<-100
@@ -32,7 +32,7 @@ Exposure_2<-1/125
 x_2 <- Luminance_2*ISO_2*Exposure_2
 plot(x_2,Y_2, xlab = "X_2 (Lux*ISO*Exposure)",ylab = "Y_2 (pixel)", col = "red") #, type="l", lty=2, lwd=3, col )
 title("Mapping Luminance to Luma Pixel intensity ")
-pixel_intensity_y_2<- (a*x_2^g) #* 1.7
+pixel_intensity_y_2<- (a*x_2^g) 
 points(x_2,pixel_intensity_y_2, xlab = "X (Lux*ISO*Exposure)",ylab = "Y (pixel)",col = "blue") #, type="l", lty=2, lwd=3 )
 legend("bottomright", c("Nomicam_Y2", "POW_EQ_Y2"), col=c("red", "blue"), lty=1, cex=0.8)
 title("Mapping Luminance to Luma Pixel intensity ")
@@ -43,7 +43,7 @@ Exposure_3<-1/125
 x_3 <- Luminance_3*ISO_3*Exposure_3
 plot(x_3,Y_3, xlab = "X_3 (Lux*ISO*Exposure)",ylab = "Y_2 (pixel)", col = "red") #, type="l", lty=2, lwd=3, col )
 title("Mapping Luminance to Luma Pixel intensity ")
-pixel_intensity_y_3<- (a*x_3^g) #* 1.3
+pixel_intensity_y_3<- (a*x_3^g)
 points(x_3,pixel_intensity_y_3, xlab = "X (Lux*ISO*Exposure)",ylab = "Y (pixel)",col = "blue") #, type="l", lty=2, lwd=3 )
 legend("bottomright", c("Nomicam_Y3", "POW_EQ_Y3"), col=c("red", "blue"), lty=1, cex=0.8)
 title("Mapping Luminance to Luma Pixel intensity ")
@@ -51,10 +51,22 @@ title("Mapping Luminance to Luma Pixel intensity ")
 graphics.off()
 # Case 4 : All Data in one plot
 plot(x,Y_1, xlab = "X (Lux*ISO*Exposure)",ylab = "Y (pixel)", col = "red") #, type="l", lty=2, lwd=3, col )
-title("Mapping Luminance to Luma Pixel intensity ")
+title("Mapping Luminance to Luma Pixel intensity")
 legend("bottomright", c("Nomicam_Y1", "Nomicam_Y2", "Nomicam_Y3", "POW_EQ_Y1", "POW_EQ_Y2", "POW_EQ_Y3"), col=c("red", "blue", "green", "orange","skyblue", "black"), lty=1, cex=0.8)
 points(x_2,Y_2, xlab = "X_2 (Lux*ISO*Exposure)",ylab = "Y_2 (pixel)", col = "blue") #, type="l", lty=2, lwd=3, col )
 points(x_3,Y_3, xlab = "X_3 (Lux*ISO*Exposure)",ylab = "Y_2 (pixel)", col = "green") #, type="l", lty=2, lwd=3, col )
+
+
+
+#Goodx<-c(x, x_2,x_3)
+#Goody<-c(Y_1, Y_2, Y_3)
+#Final<-data.frame("x" = Goodx, "y" = Goody )
+#plot(Goodx,Goody, xlab = "X (Lux*ISO*Exposure)",ylab = "Y (pixel)", col = "red") #, type="l", lty=2, lwd=3, col )
+# Write CSV in R
+#write.csv(Final, file = "C:\\Users\\varjo\\Desktop\\Final_all_dataset.csv")
+
+
+
 points(x,pixel_intensity_y, xlab = "X (Lux*ISO*Exposure)",ylab = "Y (pixel)",col = "orange") #, type="l", lty=2, lwd=3 )
 points(x_2,pixel_intensity_y_2, xlab = "X (Lux*ISO*Exposure)",ylab = "Y (pixel)",col = "skyblue") #, type="l", lty=2, lwd=3 )
 points(x_3,pixel_intensity_y_3, xlab = "X (Lux*ISO*Exposure)",ylab = "Y (pixel)",col = "black") #, type="l", lty=2, lwd=3 )
@@ -63,9 +75,9 @@ D1<-pixel_intensity_y - Y_1
 D2<-pixel_intensity_y_2 - Y_2
 D3<-pixel_intensity_y_3 - Y_3
 
-RMSQ1 <- sqrt(mean(pixel_intensity_y - Y_1)^2)
-RMSQ2 <- sqrt(mean(pixel_intensity_y_2 - Y_2)^2)
-RMSQ3 <- sqrt(mean(pixel_intensity_y_3 - Y_3)^2)
+RMSE1 <- sqrt(mean(pixel_intensity_y - Y_1)^2)
+RMSE2 <- sqrt(mean(pixel_intensity_y_2 - Y_2)^2)
+RMSE3 <- sqrt(mean(pixel_intensity_y_3 - Y_3)^2)
 
 Final<-data.frame("Y1" = Y_1, "P1" = pixel_intensity_y,"Diff_1" = D1, "Y2" = Y_2,"P2" = pixel_intensity_y_2, "Diff_2" = D2, "Y3" = Y_3,"P3"=pixel_intensity_y_3, "Diff_3" = D3)
 
@@ -86,6 +98,9 @@ SD3<-sqrt(sum((Diff_3-mean(Diff_3))^2/(length(Diff_3)-1)))
 
 
 #Print Results
-SD1
-SD2
-SD3
+
+RMSE1
+RMSE2
+RMSE3
+
+
